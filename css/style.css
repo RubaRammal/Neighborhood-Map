@@ -1,0 +1,21 @@
+html, body { height: 100%; margin: 0; padding: 0; }
+
+#map { 
+  height: 92%;
+  left: 300px;
+}
+
+.nav {
+  height: 8%;
+  background-color: black;
+}
+
+.side-nav {
+  height: 92%;
+  width:300px;
+  display: inline;
+ background-color: #000;
+ will-change: transform;
+}
+
+
