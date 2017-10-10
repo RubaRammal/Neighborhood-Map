@@ -2,20 +2,47 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 #map { 
   height: 92%;
-  left: 300px;
+  overflow: hidden;
 }
+
+
 
 .nav {
   height: 8%;
-  background-color: black;
-}
-
-.side-nav {
-  height: 92%;
-  width:300px;
-  display: inline;
  background-color: #000;
- will-change: transform;
 }
 
+#nav-container {
+    z-index: 1000;
+    position: fixed;
+    width: 300;
+    height: 92%;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
 
+#nav-container.toggled {
+	margin-left: -300px;
+}
+
+.filter{
+  width: 300px;
+}
+
+#sidebar-btn{
+  width: 50px;
+  height: 50px;
+  font-size: 2em;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  box-shadow: none;
+}
+
+#location-list {
+  color: #fff;
+}
