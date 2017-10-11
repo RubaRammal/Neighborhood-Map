@@ -6,7 +6,9 @@
      var markerIconHover;
 
      var locations = [];
+     var viewModel;
 
+     var result;
 
 
      function initMap() {
@@ -14,21 +16,21 @@
          markerIcon = makeMarkerIcon('b20000');
          markerIconHover = makeMarkerIcon('e6bab3');
 
-         var KSU = {
-             lat: 24.723915,
-             lng: 46.638471
+         var mainLoc = {
+             lat: 24.7113143,
+             lng: 46.6722581
          };
          map = new google.maps.Map(document.getElementById('map'), {
-             center: KSU,
-             zoom: 14
+             center: mainLoc,
+             zoom: 16
          });
 
          infowindow = new google.maps.InfoWindow();
          var service = new google.maps.places.PlacesService(map);
          service.nearbySearch({
-             location: KSU,
+             location: mainLoc,
              radius: 1000,
-             type: ['store']
+             type: ['cafe']
          }, callback);
      }
 
@@ -39,6 +41,8 @@
              for (var i = 0; i < results.length; i++) {
                  createLocation(results[i]);
              }
+             viewModel = new ViewModel(locations);
+             ko.applyBindings(viewModel);
          } //TODO: handle error
      }
 
@@ -70,26 +74,41 @@
          return image;
      }
 
-
      // represent a single location item
      var Location = function(name, marker) {
          this.name = ko.observable(name);
-         this.visible = ko.observable(false);
          this.marker = marker;
      };
 
-
      var ViewModel = function(loc) {
-
          var self = this;
-         self.places = loc;
+         self.places = ko.observableArray(loc);
          self.navVisible = ko.observable(false);
          self.toggleSidebar = function(data, event) {
              self.navVisible(!self.navVisible()); //toggle the navVisible value between true/false
          }
+         self.placeClick = function(place) {
+             google.maps.event.trigger(place.marker, 'click');
+         }
+         self.filterLoc = ko.observable('');
+         self.filterLocations = ko.computed(function() {
+             var filter = self.filterLoc().toLowerCase();
+             var tempLocations;
+
+             if (!filter) {
+                 ko.utils.arrayForEach(self.places(), function(temp) {
+                     temp.marker.setVisible(true);
+                 });
+                 return self.places();
+             } else {
+                 tempLocations = ko.utils.arrayFilter(self.places(), function(item) {
+                     item.marker.setVisible(false);
+                     return item.name().toLowerCase().indexOf(filter) !== -1;
+                 });
+             }
+             ko.utils.arrayForEach(tempLocations, function(temp) {
+                 temp.marker.setVisible(true);
+             });
+             return tempLocations;
+         });
      };
-
-
-     var viewModel = new ViewModel(locations);
-
-     ko.applyBindings(viewModel);
