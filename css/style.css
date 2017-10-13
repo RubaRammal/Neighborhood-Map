@@ -4,13 +4,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
+    overflow: none;
 }
 #map {
     height: 92%;
     overflow: hidden;
 }
 .nav {
-    height: 8%;
+    height: 60px;
     background-color: #000;
     color: #fff;
 }
@@ -18,13 +19,13 @@ body {
     z-index: 1000;
     position: fixed;
     width: 320;
-    height: 92%;    
+    height: 92%;
     background: #000;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    overflow: visible;
+    overflow: scroll;
 }
 #nav-container.toggled {
     margin-left: -320px;
@@ -51,7 +52,43 @@ body {
     color: #fff;
     list-style: none;
     width: 320;
-    overflow: visible;
     padding: 20px;
     cursor: pointer;
+}
+.location-item {
+    padding: 5px 0 5px 5px;
+}
+.location-item:hover {
+    background-color: #1e1e1e;
+}
+#foursquare-block {
+    font-size: 0.7em;
+    color: #e2e2e2;
+    margin-top: 28px;
+    margin-left: 10px;
+}
+#error-block {
+    bottom: 0;
+    height: 40px;
+    position: fixed;
+    background-color: #b20000;
+    width: 100%;
+    z-index: 999;
+    margin: auto;
+    display: none;
+    overflow: scroll;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.error-text {
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-size: 0.8em;
 }
