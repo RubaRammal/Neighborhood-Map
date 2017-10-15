@@ -46,9 +46,13 @@
                  url: url,
                  dataType: 'json',
                  success: function(data) { // Request successful --> create location on map
+                     places = data;
                      for (var i = 0; i < places.response.venues.length; i++) {
                          createLocation(places.response.venues[i]);
                      }
+
+                     viewModel = new ViewModel(locations);
+                     ko.applyBindings(viewModel);
                  },
                  error: function(data) { // Request fail --> display error message
                      $('.error-text').text('An error occured while loading the locations!');
@@ -59,6 +63,7 @@
                      }, 5000);
                  }
              });
+
          } else { // Error handling map load
              $('.error-text').text('An error occured while loading the map!');
              $('#error-block').show();
@@ -68,8 +73,6 @@
              }, 5000);
          }
 
-         viewModel = new ViewModel(locations);
-         ko.applyBindings(viewModel);
      }
 
      /**
@@ -125,7 +128,7 @@
          google.maps.event.addListener(marker, 'click', function() {
              marker.setIcon(markerIconHover);
 
-             if (photo) infoWindow.setContent('<div>' + venue.name + '<br><img src="' + photo + '"></div>');
+             if (photo) infoWindow.setContent('<div>' + venue.name + '<br><img src="' + photo + '" onerror="this.onerror=null;this.src=\'images/notfound.png\'"></div>');
              else infoWindow.setContent('<div>' + venue.name + '</div>');
              infoWindow.open(map, this);
          });

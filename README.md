@@ -11,7 +11,7 @@ This project is part of Udacity's frontend nanodegree. The goal is to create a m
 
 ### Dependencies
 
-__* This project uses the following APIs:__
+__This project uses the following APIs:__
 
 1. [Google Maps APIs](https://developers.google.com/maps/) 
 This API is used to load a map, create markers of locations on the map and opens an infoWindow that displays location details when a marker is clicked.
