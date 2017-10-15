@@ -20,6 +20,7 @@
 
      /**
       * @description Initializes the map and requests locations from Foursquare API
+      * Code reference: Google Maps API documentation, https://developers.google.com/maps/documentation
       */
      function initMap() {
 
@@ -125,6 +126,7 @@
 
          // Add click event listener to the marker
          // It appends the photo and name to the infoWindow and opens it
+         // Code reference: Udacity videows
          google.maps.event.addListener(marker, 'click', function() {
              marker.setIcon(markerIconHover);
 
@@ -138,6 +140,7 @@
       * @description Creates a marker icon
       * @param {String} markerColor
       * @return {String} image
+      * Code reference: Google Maps API documentation, https://developers.google.com/maps/documentation
       */
      function makeMarkerIcon(markerColor) {
          var image = {
@@ -155,6 +158,7 @@
       * and filtering the locations based on the input from the 
       * text field and handles list item (location) clicks
       * @param {Location []} loc
+      * Coded reference: TodoMVC, http://todomvc.com/
       */
      var ViewModel = function(loc) {
          var self = this;
@@ -163,6 +167,7 @@
          self.places = ko.observableArray(loc);
          self.navVisible = ko.observable(false);
          // Toggle class to hide/show sidebar
+         // Code reference: https://stackoverflow.com/questions/23385937/knockout-toggle-active-class-on-click
          self.toggleSidebar = function(data, event) {
              self.navVisible(!self.navVisible());
          };
@@ -172,6 +177,7 @@
          };
          self.filterLoc = ko.observable('');
          // Filter locations
+         // Code reference: https://stackoverflow.com/questions/32343306/live-table-search-in-knockout-calling-function-on-keyup
          self.filterLocations = ko.computed(function() {
              var filter = self.filterLoc().toLowerCase();
              var tempLocations;
@@ -195,3 +201,6 @@
              return tempLocations; // return filtered locations
          });
      };
+
+
+
