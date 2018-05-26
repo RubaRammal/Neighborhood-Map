@@ -25,8 +25,8 @@
   */
  function initMap() {
 
-    markerIcon = makeMarkerIcon('b20000');
-    markerIconHover = makeMarkerIcon('e6bab3');
+    markerIcon = makeMarkerIcon('red');
+    markerIconHover = makeMarkerIcon('other');
 
     var mainLoc = {
         lat: 24.7113143,
@@ -42,7 +42,7 @@
         infoWindow = new google.maps.InfoWindow();
         // Get locations (coffee stores) from Foursquare API that are within 500 radius of the main location
         var url = 'https://api.foursquare.com/v2/venues/search?ll=' + mainLoc.lat + ',' + mainLoc.lng +
-            '&query=coffee&radius=500&client_id=PVARFLB4RALKAWI0SHBUSM3GPAHX3B02L3YGX0R3IOV2NCQO&client_secret=SY334RFX554W34D5S5CEX3YUR3VT1T2OSXAR5CDRVKW3CFAO&v=20170304';
+            '&query=coffee&radius=1000&client_id=PVARFLB4RALKAWI0SHBUSM3GPAHX3B02L3YGX0R3IOV2NCQO&client_secret=SY334RFX554W34D5S5CEX3YUR3VT1T2OSXAR5CDRVKW3CFAO&v=20170304';
 
         $.ajax({
             url: url,
@@ -149,13 +149,25 @@
   * Code reference: Google Maps API documentation, https://developers.google.com/maps/documentation
   */
  function makeMarkerIcon(markerColor) {
-    var image = {
-        url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
-        size: new google.maps.Size(21, 34),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(10, 34),
-        scaledSize: new google.maps.Size(21, 34)
-    };
+    if (markerColor === 'red') {
+        var image = {
+            // url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
+            url: 'https://i.imgur.com/70t6DzB.png',
+            size: new google.maps.Size(21, 34),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(10, 34),
+            scaledSize: new google.maps.Size(21, 34)
+        };
+    } else {
+            var image = {
+            // url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
+            url: 'https://i.imgur.com/oP3rrMr.png',
+            size: new google.maps.Size(21, 34),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(10, 34),
+            scaledSize: new google.maps.Size(21, 34)
+        };
+    }
     return image;
  }
 
